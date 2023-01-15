@@ -2,7 +2,7 @@
   <div>
     <client-only>
       <div>
-        <p style="text-align: center">کار های ارجاع شده به من</p>
+        <p style="text-align: center">کار های ارجاع شده توسط من</p>
         <ApexCharts
           :options="chartOptions()"
           :series="series"
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "donutPage",
+
   data() {
     return {
       total: 0,
@@ -88,7 +88,7 @@ export default {
     const {
       data: { result },
     } = await this.$axios.$get(
-      "https://ws.datisint.com/api/v2/staff/report/getReport/22?user_id=1077&start_date=0&end_date=1857617000&type=user",
+      "https://ws.datisint.com/api/v2/staff/report/getReport/22?user_id=1077&start_date=0&end_date=1857617000&type=creator",
       {
         headers: {
           Authorization:

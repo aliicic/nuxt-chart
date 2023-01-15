@@ -12,6 +12,14 @@
       <Chart5/>
       <Chart6/>
     </div>
+    <div class="row">
+      <Chart7/>
+      <Chart8/>
+    </div>
+    <div class="row">
+      <Chart9/>
+      <Chart10/>
+    </div>
   </div>
 </template>
 

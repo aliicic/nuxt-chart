@@ -66,7 +66,7 @@ export default {
     const {
       data: { result },
     } = await this.$axios.$get(
-      "https://ws.datisint.com/api/v2/staff/report/getReport/22?user_id=1077&start_date=0&end_date=1857617000&type=creatorl",
+      "https://ws.datisint.com/api/v2/staff/report/getReport/22?user_id=1077&start_date=0&end_date=1857617000&type=creator",
       {
         headers: {
           Authorization:
