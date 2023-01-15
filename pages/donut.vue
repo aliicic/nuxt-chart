@@ -1,13 +1,20 @@
 <template>
   <div>
     <client-only>
-      <ApexCharts
+      <div
+
+      >
+        <ApexCharts
+  
         :options="chartOptions()"
         :series="series"
         :height="460"
-        :width="1000"
+        :width="600"
         chart-id="vuechart-example"
       />
+      <p style="text-align: center">  متوسط عملکرد در هر هفته {{ middleTotal }}  ساعت </p>
+      </div>
+   
     </client-only>
   </div>
 </template>
@@ -17,19 +24,11 @@ export default {
   name: "donutPage",
   data() {
     return {
-      posts: "",
-      series: [450, 300],
+      total: 0,
+      series: [],
     };
   },
   methods: {
-    async getkeys() {
-      for (const [key, value] of Object.entries(this.posts.result)) {
-        // console.log(`key: ${key}: value : ${value.total_activity} , ${value.total_task}`);
-        this.options.xaxis.categories.push(key);
-        this.series[0].data.push(value.total_activity);
-        this.series[1].data.push(value.total_task);
-      }
-    },
     chartOptions() {
       return {
         labels: ["تعداد وظیفه ها", "تعداد فعالیت ها"],
@@ -62,11 +61,12 @@ export default {
                 total: {
                   show: true,
                   enable: true,
-                  label: "تمام تسک ها",
+                  label: "تمام عملکرد برحسب ساعت",
                   formatter: (w) => {
-                    return w.globals.seriesTotals.reduce((a, b) => {
-                      return a + b;
-                    }, 0);
+                    // return w.globals.seriesTotals.reduce((a, b) => {
+                    //   return a + b;
+                    // }, 0);
+                    return this.total;
                   },
                 },
               },
@@ -76,11 +76,16 @@ export default {
         dataLabels: {
           show: true,
 
-          formatter: (val, opts) => {
-            return opts.w.config.series[opts.seriesIndex];
-          },
+          // formatter: (val, opts) => {
+          //   return opts.w.config.series[opts.seriesIndex];
+          // },
         },
       };
+    },
+  },
+  computed: {
+    middleTotal() {
+      return Math.round(this.total / 4);
     },
   },
   async fetch() {
@@ -96,11 +101,16 @@ export default {
         },
       }
     );
-    this.posts = result;
-  },
-
-  mounted() {
-    // await this.getkeys();
+    this.total = Math.round(result.total);
+    this.series = [result.total_activity_count, result.total_task_count];
   },
 };
 </script>
+<style>
+
+.apexcharts-canvas{
+  margin: 0 auto;
+  background: rgb(242, 242, 242);
+}
+
+</style>
