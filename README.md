@@ -1,3 +1,1 @@
-# Hello World with Nuxt
-
-https://nuxtjs.org/examples
+using chart in nuxt.js
