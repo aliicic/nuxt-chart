@@ -46,7 +46,7 @@ export default {
     };
   },
   methods: {
-    async getKeyValues() {
+  getKeyValues() {
       for (const [key, value] of Object.entries(this.posts.result)) {
         // console.log(`key: ${key}: value : ${value.total_activity} , ${value.total_task}`);
         this.options.xaxis.categories.push(key);
