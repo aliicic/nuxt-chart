@@ -70,8 +70,8 @@ export default {
     );
     this.posts = result;
   },
-  async mounted() {
-    await this.getKeyValues();
+   mounted() {
+   this.getKeyValues();
   },
 };
 </script>
