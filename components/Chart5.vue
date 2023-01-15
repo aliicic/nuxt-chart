@@ -1,20 +1,16 @@
 <template>
   <div>
     <client-only>
-      <div
-
-      >
+      <div>
+        <p style="text-align: center">کار های ارجاع شده به من</p>
         <ApexCharts
-  
-        :options="chartOptions()"
-        :series="series"
-        :height="460"
-        :width="600"
-        chart-id="vuechart-example"
-      />
-      <p style="text-align: center">  متوسط عملکرد در هر هفته {{ middleTotal }}  ساعت </p>
+          :options="chartOptions()"
+          :series="series"
+          :height="460"
+          :width="600"
+          chart-id="vuechart-example"
+        />
       </div>
-   
     </client-only>
   </div>
 </template>
@@ -31,7 +27,7 @@ export default {
   methods: {
     chartOptions() {
       return {
-        labels: ["تعداد وظیفه ها", "تعداد فعالیت ها"],
+        labels: ["تکمیل شده", "در حال انجام", "منقضی شده"],
         chart: {
           toolbar: { show: false },
           id: "vuechart-example",
@@ -59,7 +55,7 @@ export default {
                   offsetY: 11,
                 },
                 total: {
-                  show: true,
+                  show: false,
                   enable: true,
                   label: "تمام عملکرد برحسب ساعت",
                   formatter: (w) => {
@@ -83,16 +79,16 @@ export default {
       };
     },
   },
-  computed: {
-    middleTotal() {
-      return Math.round(this.total / 4);
-    },
-  },
+  // computed: {
+  //   middleTotal() {
+  //     return Math.round(this.total / 4);
+  //   },
+  // },
   async fetch() {
     const {
       data: { result },
     } = await this.$axios.$get(
-      "https://ws.datisint.com/api/v2/staff/report/getReport/12?user_id=1077&start_date=0&end_date=1857617000&type=creatorl",
+      "https://ws.datisint.com/api/v2/staff/report/getReport/22?user_id=1077&start_date=0&end_date=1857617000&type=creatorl",
       {
         headers: {
           Authorization:
@@ -101,16 +97,18 @@ export default {
         },
       }
     );
-    this.total = Math.round(result.total);
-    this.series = [result.total_activity_count, result.total_task_count];
+    //   this.total = Math.round(result.total);
+    this.series = [
+      result.close_pass_count,
+      result.open_not_pass_count,
+      result.close_not_pass_count,
+    ];
   },
 };
 </script>
 <style>
-
-.apexcharts-canvas{
+.apexcharts-canvas {
   margin: 0 auto;
   background: rgb(242, 242, 242);
 }
-
 </style>
