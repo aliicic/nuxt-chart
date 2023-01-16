@@ -9,7 +9,9 @@ export default {
 
     components: true,
    
-    modules: ['@nuxtjs/axios']
+    modules: ['@nuxtjs/axios'],
       
-
+    build: {
+      postcss: null,
+      }
   }

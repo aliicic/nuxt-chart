@@ -20,6 +20,10 @@
       <Chart9/>
       <Chart10/>
     </div>
+    <div class="row">
+      <Chart11/>
+      <Chart12/>
+    </div>
   </div>
 </template>
 
